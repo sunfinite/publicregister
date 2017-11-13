@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Public Register</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+<body>
+
+
+<div>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Public Register</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="http://sunfinite.tech:8000" target="_blank">Blockchain</a></li>
+      <li><a href="">Code</a></li>
+      <li><a href="#">App</a></li>
+    </ul>
+  </div>
+</nav>
+</div>
+
+<div class="content col-md-8" style="position:absolute; top: 5%;">
+<div class="container">
+  <div class="jumbotron">
+    <!--h1>Public Register</h1--> 
+    <p>Store signatures of  marks cards in a public database. 
+    These signatures are tamper-proof and every access is logged and controlled</p>
+    <p><b>Note: Actual marks are not stored and remain private.</b></p>
+    <p><small>This can be extended to any document type (eg. certificates)</small></p>
+  </div>
+</div>
+
+{% if message %}
+    <div class="alert alert-{{class}}"><p>{{message}}</p></div>
+{% endif %}
+
+<div>
+<form class="form-horizontal" method="POST"  enctype="multipart/form-data">
+{% csrf_token %}
+<fieldset> 
+<!-- Form Name -->
+<legend>Add Marks Card(s)</legend>
+
+<!-- File Button --> 
+<div class="form-group">
+  <label class="col-md-4 control-label" for="file">Upload File</label>
+  <div class="col-md-4">
+    <input id="file" name="file" class="input-file" type="file">
+  <span class="help-block">Single image or csv/excel file</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="passphrase">Passphrase</label>  
+  <div class="col-md-4">
+  <input id="passphrase" name="passphrase" type="password" placeholder="" class="form-control input-md" required="">
+  <span class="help-block">Only accounts approved by a validator. Use 'apple' for demo.</span>
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="submit"></label>
+  <div class="col-md-4">
+    <input type="submit" name="add_submit" value="Submit" class="btn btn-primary" />
+  </div>
+</div>
+
+</fieldset>
+</form>
+</div>
+<form class="form-horizontal" method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+<fieldset> 
+<!-- Form Name -->
+<legend>Verify Marks Card(s)</legend>
+
+<!-- File Button --> 
+<div class="form-group">
+  <label class="col-md-4 control-label" for="file">Upload File</label>
+  <div class="col-md-4">
+    <input id="file" name="file" class="input-file" type="file">
+  <span class="help-block">Single image or csv/excel file</span>  
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="submit"></label>
+  <div class="col-md-4">
+    <input type="submit" name="verify_submit" value="Verify" class="btn btn-success" />
+  </div>
+</div>
+
+</fieldset>
+</form>
+
+<form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Download Proof</legend>
+{% csrf_token %}
+<span class="help-block alert-warning">Because of a <a href="https://en.wikipedia.org/wiki/Merkle_tree" target="_blank">special construction</a> of the signature on the blockchain, we can verify a part of the document without knowing the rest.</span>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="id">ID</label>  
+  <div class="col-md-4">
+  <input id="id" name="id" type="text" placeholder="1PI08CS120" class="form-control input-md" required="">
+  <span class="help-block">Unique ID on marks card</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="subject">Subject</label>  
+  <div class="col-md-4">
+  <input id="subject" name="subject" type="text" placeholder="Computer Architecture" class="form-control input-md" required="">
+  <span class="help-block">Subject name on the marks card</span>  
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="grade">Marks/Grade</label>  
+  <div class="col-md-4">
+  <input id="grade" name="grade" type="text" placeholder="A" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="submit"></label>
+  <div class="col-md-4">
+    <button id="submit" name="proof_submit" class="btn btn-primary">Submit</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+
+<form class="form-horizontal" method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+<fieldset> 
+<!-- Form Name -->
+<legend>Verify Proof</legend>
+
+<!-- File Button --> 
+<div class="form-group">
+  <label class="col-md-4 control-label" for="file">Upload Proof File</label>
+  <div class="col-md-4">
+    <input id="file" name="file" class="input-file" type="file">
+  <span class="help-block">JSON file downloaded from app or website</span>  
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="submit"></label>
+  <div class="col-md-4">
+    <input type="submit" name="verify_proof_submit" value="Verify" class="btn btn-success" />
+  </div>
+</div>
+
+</fieldset>
+</form>
+
+<form class="form-horizontal">
+<fieldset>
+</div>
+</body>
