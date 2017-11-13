@@ -29,3 +29,5 @@ Fake marks cards continue to be a recurring problem. A recent  case (https://goo
 * Testrpc
 * Truffle
 * Etherparty block explorer
+* Android Studio
+
