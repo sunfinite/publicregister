@@ -11,7 +11,7 @@ Fake marks cards continue to be a recurring problem. A recent  case (https://goo
 	* __PublicValidator.sol__: Called by the `PublicRegister` contract to verify if an _Issuer_ is known. This contract can be updated only by a single entity (eg. Department of Education)
 * __Partial Proofs__:
 	* For marks cards, we extract tabular information and unique ID and compute the signature using a data structure known as the [Merkle Tree](https://en.wikipedia.org/wiki/Merkle_tree).
-	* This enables us to verify a signal subject's marks or grade without knowing other grades.
+	* This enables us to verify a single subject's marks or grade without knowing other grades.
 
 
 ### Demo
